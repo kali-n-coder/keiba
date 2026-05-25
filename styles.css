@@ -1,0 +1,296 @@
+:root {
+  color-scheme: light;
+  --ink: #17202a;
+  --muted: #5d6875;
+  --line: #d8dee7;
+  --paper: #f7f8fa;
+  --panel: #ffffff;
+  --accent: #d94f30;
+  --green: #207c59;
+  --blue: #2b63a3;
+  font-family: "Segoe UI", "Hiragino Sans", "Yu Gothic UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  cursor: pointer;
+  min-height: 42px;
+  padding: 0 16px;
+}
+
+input {
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #fff;
+  color: var(--ink);
+}
+
+.app-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 48px;
+}
+
+.topbar,
+.player-panel,
+.control-panel,
+.table-panel,
+.bet-panel,
+.race-panel,
+.result-panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.topbar,
+.player-panel,
+.section-head,
+.control-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 34px;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.admin-link {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.warning {
+  border: 1px solid #e5a35a;
+  border-radius: 8px;
+  background: #fff5e6;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.inline-form,
+.grant-form,
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.balance-box {
+  border-left: 4px solid var(--green);
+  padding-left: 16px;
+  min-width: 160px;
+}
+
+.balance-box span {
+  display: block;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.balance-box strong {
+  display: block;
+  font-size: 36px;
+}
+
+.stake-label {
+  display: grid;
+  gap: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.stake-label input {
+  width: 120px;
+}
+
+.horse-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.horse-card {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  align-items: center;
+  gap: 4px 10px;
+  min-height: 78px;
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+}
+
+.horse-card small {
+  grid-column: 2;
+  color: var(--muted);
+}
+
+.horse-card.selected {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.horse-swatch {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--horse);
+}
+
+.commentary {
+  color: var(--muted);
+  max-width: 420px;
+}
+
+.track {
+  display: grid;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.lane {
+  position: relative;
+  height: 48px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: repeating-linear-gradient(90deg, #fdfdfd, #fdfdfd 28px, #f1f4f7 29px, #f1f4f7 30px);
+  overflow: hidden;
+}
+
+.lane-name {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 13px;
+  transform: translateY(-50%);
+}
+
+.runner {
+  position: absolute;
+  top: 50%;
+  left: clamp(96px, var(--x), calc(100% - 36px));
+  color: var(--horse);
+  font-size: 32px;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+  transform: translate(-50%, -50%);
+  transition: left 240ms linear;
+}
+
+.standings {
+  display: grid;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding-left: 24px;
+}
+
+.standings li {
+  padding: 10px;
+  border-radius: 8px;
+  background: #f1f4f7;
+}
+
+.standings span {
+  color: var(--muted);
+  float: right;
+}
+
+.selected-row {
+  outline: 2px solid var(--accent);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--line);
+  padding: 10px;
+  text-align: left;
+}
+
+td button {
+  min-height: 32px;
+  padding: 0 10px;
+  background: #fff;
+  color: var(--blue);
+}
+
+@media (max-width: 720px) {
+  .topbar,
+  .player-panel,
+  .section-head,
+  .control-panel {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .commentary {
+    max-width: none;
+  }
+
+  .inline-form input,
+  .grant-form input {
+    width: 100%;
+  }
+}
