@@ -61,19 +61,25 @@ el.saveName.addEventListener('click', async () => {
 });
 
 function renderHorseChoices() {
-  el.horses.innerHTML = HORSES.map((horse) => `
-    <button class="horse-card" data-horse-id="${horse.id}" type="button">
-      <span class="horse-swatch" style="--horse:${horse.color}"></span>
-      <strong>${horse.name}</strong>
-      <small>${horse.style} / x${horse.odds}</small>
-    </button>
+  el.horses.innerHTML = HORSES.map((horse, index) => `
+    <div class="horse-row" data-horse-id="${horse.id}">
+      <span class="horse-avatar" style="--horse:${horse.color}">🐎</span>
+      <span class="horse-meta">
+        <strong>${index + 1}. ${horse.name}</strong>
+        <small>${horse.style}</small>
+      </span>
+      <strong class="horse-odds">${horse.odds}x</strong>
+      <input class="bet-input" inputmode="numeric" type="number" min="1" step="1" placeholder="金額" value="${el.stake.value || 10}" aria-label="${horse.name} の金額">
+      <button class="bet-button" data-horse-id="${horse.id}" type="button">BET</button>
+    </div>
   `).join('');
 
   el.horses.addEventListener('click', async (event) => {
-    const button = event.target.closest('[data-horse-id]');
+    const button = event.target.closest('.bet-button');
     if (!button || !state.player) return;
     const horse = HORSES.find((item) => item.id === button.dataset.horseId);
-    const stake = Math.floor(Number(el.stake.value) || 0);
+    const row = button.closest('.horse-row');
+    const stake = Math.floor(Number(row?.querySelector('.bet-input')?.value) || 0);
     const raceStatus = state.race?.status ?? 'waiting';
 
     if (raceStatus !== 'waiting') {
@@ -123,8 +129,8 @@ function watchPlayer() {
     state.player = snapshot.data();
     el.playerName.value = state.player.name || '';
     el.balance.textContent = state.player.balance ?? 0;
-    document.querySelectorAll('.horse-card').forEach((button) => {
-      button.classList.toggle('selected', button.dataset.horseId === state.player.selectedHorseId);
+    document.querySelectorAll('.horse-row').forEach((row) => {
+      row.classList.toggle('selected', row.dataset.horseId === state.player.selectedHorseId);
     });
   });
 }
@@ -164,7 +170,7 @@ function renderRace() {
 
 function renderTrack(runners) {
   el.track.innerHTML = runners.map((runner) => `
-    <div class="lane">
+    <div class="lane" style="--horse:${runner.color}">
       <span class="lane-name">${runner.name}</span>
       <span class="runner" style="--horse:${runner.color}; --x:${runner.progress * 100}%">♞</span>
     </div>
