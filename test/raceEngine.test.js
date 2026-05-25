@@ -31,6 +31,14 @@ test('getRaceSnapshot advances runners by elapsed time without exceeding the fin
   assert.ok(finished.runners.every((runner) => runner.progress === 1));
 });
 
+test('getRaceSnapshot moves every runner once the race is underway', () => {
+  const plan = createRacePlan({ seed: 9090, horses: HORSES, durationMs: 30000 });
+  const snapshot = getRaceSnapshot({ plan, startTime: 5_000, now: 17_000 });
+
+  assert.equal(snapshot.runners.length, HORSES.length);
+  assert.ok(snapshot.runners.every((runner) => runner.progress > 0));
+});
+
 test('getFinalStandings sorts by finish time and uses horse ids as deterministic tie breaker', () => {
   const plan = {
     runners: [

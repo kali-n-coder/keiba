@@ -4,7 +4,7 @@ export const HORSES = [
   { id: 'iincho', name: 'ゼンリョク委員長', style: '差し', color: '#2e86ab', odds: 4.2 },
   { id: 'tshirt', name: 'クラスTシャツ', style: '追込', color: '#4fb286', odds: 5.6 },
   { id: 'tenko', name: '転校生ブースト', style: '気まぐれ', color: '#8f63c7', odds: 7.8 },
-  { id: 'haunted', name: 'お化け屋敷ステップ', style: '大穴', color: '#2f2f37', odds: 12.5 }
+  { id: 'haunted', name: 'お化け屋敷ステップ', style: '大穴', color: '#39c7e6', odds: 12.5 }
 ];
 
 export const DEFAULT_RACE_DURATION_MS = 30_000;
